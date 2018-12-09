@@ -62,5 +62,19 @@ def main():
     plt.title('Conference differential after %s' %season_has_confer[:4])
     plt.savefig("pic/Conference differential 2001 .png", dpi=300)
 
+    #Conference differential after 2001 each year
+    for i in years:
+        conference_in = [dt[j]["Conference"] for j in dt if dt[j]["Season"] == i]
+        if str(conference_in[0]) == "nan":
+            pass
+        else:
+            conference_in_a = [conference_in.count(i) for i in ["East", "West"]]
+            sizes = [conference_in_a[0], conference_in_a[1]]
+            fig1, ax1 = plt.subplots()
+            labels = ["East", "West"]
+            ax1.pie(sizes, labels=labels, autopct='%1.2f%%', startangle=90. )
+            plt.axis('equal')
+            plt.title("Conference differential in %s Season" %i)
+            plt.savefig("pic/Conference differential in %s Season.png" %i, dpi=300)
 
 main()
