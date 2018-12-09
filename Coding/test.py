@@ -32,26 +32,35 @@ def main():
     plt.xticks(y_pos, ages)
     for x,y in zip(ages, numbers):
         plt.text(x-19.2, y+1, str(y), size=5, )
-    plt.savefig("Age of people.png", dpi=300)
+    plt.savefig("pic/Age of people.png", dpi=300)
     #plt.show()
     #End of age record--
 
-    #Conference record
     #Check Season whtch conference not "nan"
     for i in dt:
         if str(dt[i]["Conference"]) != "nan":
             season_has_confer = dt[i]["Season"]
             break
+    #Make season list
+    years = [dt[i]["Season"] for i in dt]
+    years = sorted(list(set(years)))
     
+    #Conference record
+    
+    #Conference differential after 2001 season 
     conference = []
     for key, value in df["Conference"].items():
         conference.append(value)
     Conference_arranged = {}
     for i in ["East", "West"]:
-        Conference_arranged[i] = conference.count(i) 
-    print(Conference_arranged)
+        Conference_arranged[i] = conference.count(i)
+    fig1, ax1 = plt.subplots()
+    labels = ["East", "West"]
+    sizes = [Conference_arranged["East"], Conference_arranged["West"]]
+    ax1.pie(sizes, labels=labels, autopct='%1.2f%%', startangle=90. )
+    plt.axis('equal')
+    plt.title('Conference differential after %s' %season_has_confer[:4])
+    plt.savefig("pic/Conference differential 2001 .png", dpi=300)
 
-        
-        
 
 main()
