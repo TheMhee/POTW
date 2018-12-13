@@ -1,7 +1,10 @@
 import pandas as pd
-import numpy as np
 import pygal as pg
 def main():
+    """Age chart
+    make data with pandas library
+    make chart with pygal
+    s"""
     dt = pd.read_csv('nba.csv').T.to_dict()
     df = pd.read_csv('nba.csv').to_dict()
     seasons = [dt[i]["Season short"] for i in dt]

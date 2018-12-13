@@ -2,7 +2,10 @@ import pandas as pd
 import numpy as np
 import pygal as pg
 def main():
-    """Top player chart"""
+    """Top player chart
+    make data with pandas library
+    make chart with pygal
+    """
     dt = pd.read_csv('nba.csv').T.to_dict()
     df = pd.read_csv('nba.csv').to_dict()
     player = [dt[i]["Player"] for i in dt]

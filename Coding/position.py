@@ -1,7 +1,10 @@
 import pandas as pd
-import numpy as np
 import pygal as pg
 def main():
+    """ position Chart 
+    make data with pandas library
+    make chart with pygal
+    """
     dt = pd.read_csv('nba.csv').T.to_dict()
     df = pd.read_csv('nba.csv').to_dict()
     seasons = [dt[i]["Season short"] for i in dt]
@@ -23,6 +26,7 @@ def main():
         chartmaker(position_count2, season)
 
 def chartmaker(position_count, season):
+    """chartmaker function"""
     line_chart = pg.HorizontalBar(legend_at_bottom=True, legend_at_bottom_columns=4)
     line_chart.title = "POTW position count in %s" %season
     for key, value in position_count.items():
