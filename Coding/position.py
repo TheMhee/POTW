@@ -14,6 +14,14 @@ def main():
         position_count[position_full[i]] = position.count(position_list[i])
     chartmaker(position_count, "every season")
 
+    for season in seasons:
+        position_count2 = {}
+        position2 = [dt[i]["Position"] for i in dt if dt[i]["Season short"] == season]
+        position_list2 = sorted(list(set(position2)))
+        for i in range(len(position_list)):
+            position_count2[position_full[i]] = position2.count(position_list[i])
+        chartmaker(position_count2, season)
+
 def chartmaker(position_count, season):
     line_chart = pg.HorizontalBar(legend_at_bottom=True, legend_at_bottom_columns=4)
     line_chart.title = "POTW position count in %s" %season
