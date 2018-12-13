@@ -4,7 +4,7 @@ import pygal as pg
 def main():
     dt = pd.read_csv('nba.csv').T.to_dict()
     df = pd.read_csv('nba.csv').to_dict()
-    seasons = [dt[i]["Season"] for i in dt]
+    seasons = [dt[i]["Season short"] for i in dt]
     seasons = sorted(list(set(seasons)))
     keys = []
     #make datas for bar
@@ -24,7 +24,7 @@ def main():
 
     #each season pie
     for season in seasons:
-        age_list_each = [dt[i]["Age"] for i in dt if season in dt[i]["Season"]]
+        age_list_each = [dt[i]["Age"] for i in dt if season == dt[i]["Season short"]]
         age_of = {}
         for i in range(min(age_list_each), max(age_list_each)+1):
             if age_list_each.count(i) != 0 : age_of[i] = age_list_each.count(i)

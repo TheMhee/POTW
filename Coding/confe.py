@@ -4,7 +4,7 @@ import pygal as pg
 def main():
     dt = pd.read_csv('nba.csv').T.to_dict()
     df = pd.read_csv('nba.csv').to_dict()
-    seasons = [dt[i]["Season"] for i in dt]
+    seasons = [dt[i]["Seasons in league"] for i in dt]
     seasons = sorted(list(set(seasons)))
     #data for after 2001 season chart
     conference = []
@@ -21,7 +21,7 @@ def main():
     #data for each year chart
     conference_west, conference_east = [], []
     for season in seasons:
-        conference = [dt[i]["Conference"] for i in dt if dt[i]["Season"] == season]
+        conference = [dt[i]["Conference"] for i in dt if dt[i]["Seasons in league"] == season]
         if str(conference[0]) != "nan":
             conference_west.append((conference.count("West")/(conference.count("West")+conference.count("East")))*100)
             conference_east.append((conference.count("East")/(conference.count("East")+conference.count("West")))*100)
