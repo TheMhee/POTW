@@ -12,8 +12,19 @@ def main():
     for i in team_list:
         team_count[i] = team.count(i)
     chartmaker(team_count, "every season")
-    
-    
+
+    team_line_count = [[] for _ in team_list]
+
+    for season in seasons:
+        team2 = [dt[i]["Team"] for i in dt if dt[i]["Season short"] == season]
+        team_list2 = sorted(list(set(team2)))
+        for i in range(len(team_list)):
+            team_line_count[i].append(team2.count(team_list[i]))
+        team_count2 = {}
+        for i in team_list2:
+            team_count2[i] = team2.count(i)
+        chartmaker(team_count2, season)
+  
 def chartmaker(team_count, season):
     line_chart = pg.HorizontalBar(legend_at_bottom=True, legend_at_bottom_columns=4)
     line_chart.title = "POTW teams count in %s" %season
