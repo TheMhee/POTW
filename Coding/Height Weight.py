@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import pygal as pg
 def main():
     """ Top HEIGHT WEIGHT Chart 
@@ -12,20 +11,22 @@ def main():
     height = [dt[i]["Height"] for i in dt]
     weight = [dt[i]["Weight"] for i in dt]
     height_convert, weight_convert = [], []
+    #in dataset some height and weight not kg or cm. must change to it
     for i in height:
-        if len(i) <= 4:
+        if len(i) <= 4: #if data is foot-inch change it to cm
             i = convert_h(i)
         elif i[3:] == "cm":
             i = int(i.replace("cm", ""))
         height_convert.append(i)
     for i in weight:
-        if len(str(i)) == 3:
+        if len(str(i)) == 3: #if data is ibs change it to kg
             i = int(i)*0.453
         else:
             i = i.replace("kg", "")
         weight_convert.append(int(i))
+    #make graph
     player_list = {}
-    for i in range(len(player)):
+    for i in range(len(player)): #make dict of players only height and weight after convert
         player_list[player[i]] = [height_convert[i], weight_convert[i]]
     top_h = sorted(player_list.items(), key=lambda x: x[1][0], reverse = True)
     top_w = sorted(player_list.items(), key=lambda x: x[1][1], reverse = True)
@@ -47,7 +48,8 @@ def chartmaker(top, num, title):
 
 
 def convert_h(i):
-    """Convert height from foot-inch to cm"""
+    """Convert height from foot-inch to cm
+    (if data is foot-inch like 6-9)"""
     temp = i.replace("-", " ").split()
     temp = int(temp[0])*30.48 + int(temp[1])*2.54
     return int(temp)
